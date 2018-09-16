@@ -1,0 +1,8 @@
+D:\Dev\Planner\planner\Planner\Planner.Core\obj\Debug\netcoreapp2.1\Planner.Core.csproj.CoreCompileInputs.cache
+D:\Dev\Planner\planner\Planner\Planner.Core\obj\Debug\netcoreapp2.1\Planner.Core.AssemblyInfoInputs.cache
+D:\Dev\Planner\planner\Planner\Planner.Core\obj\Debug\netcoreapp2.1\Planner.Core.AssemblyInfo.cs
+D:\Dev\Planner\planner\Planner\Planner.Core\bin\Debug\netcoreapp2.1\Planner.Core.deps.json
+D:\Dev\Planner\planner\Planner\Planner.Core\bin\Debug\netcoreapp2.1\Planner.Core.dll
+D:\Dev\Planner\planner\Planner\Planner.Core\bin\Debug\netcoreapp2.1\Planner.Core.pdb
+D:\Dev\Planner\planner\Planner\Planner.Core\obj\Debug\netcoreapp2.1\Planner.Core.dll
+D:\Dev\Planner\planner\Planner\Planner.Core\obj\Debug\netcoreapp2.1\Planner.Core.pdb
