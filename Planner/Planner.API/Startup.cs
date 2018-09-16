@@ -9,6 +9,8 @@ using Planner.Core.Domain;
 using Planner.Infrastructure.Data;
 using Planner.Infrastructure.Interface;
 using Planner.Infrastructure.Repository;
+using Planner.Infrastructure.Service;
+using AutoMapper;
 
 namespace Planner.API
 {
@@ -29,8 +31,11 @@ namespace Planner.API
 					(options => options.UseInMemoryDatabase(connection));
 
 			services.AddScoped<IProjectRepository, ProjectRepository>();
-			
-			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddScoped<IProjectService, ProjectService>();
+
+            services.AddAutoMapper();
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

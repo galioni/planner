@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Planner.Core.Domain;
+using Planner.Infrastructure.DTO;
 using Planner.Infrastructure.Interface;
 using System;
 using System.Collections.Generic;
@@ -12,30 +13,30 @@ namespace Planner.API.Controllers
 	[ApiController]
 	public class ProjectsController : ControllerBase
 	{
-		private IProjectRepository _projectRepository;
+		private IProjectService _projectService;
 
-		public ProjectsController(IProjectRepository projectRepository)
+		public ProjectsController(IProjectService projectService)
 		{
-			this._projectRepository = projectRepository;
+			this._projectService = projectService;
 		}
 
 		// GET: api/Projects
 		[HttpGet]
-		public async Task<IEnumerable<Project>> GetProjects()
+		public async Task<IEnumerable<ProjectDTO>> GetProjects()
 		{
-			return await _projectRepository.GetAllProjectsAsync();
+			return await _projectService.GetAllProjectsAsync();
 		}
 
 		// GET: api/Projects/5
 		[HttpGet("{id}")]
-		public async Task<IActionResult> GetProject([FromRoute] Guid id)
+		public async Task<IActionResult> GetProject([FromRoute] int id)
 		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 			}
 
-			var project = await _projectRepository.GetProjectByIdAsync(id);
+			var project = await _projectService.GetProjectByIdAsync(id);
 
 			if (project == null)
 			{
@@ -80,14 +81,14 @@ namespace Planner.API.Controllers
 
 		// POST: api/Projects
 		[HttpPost]
-		public async Task<IActionResult> PostProject([FromBody] Project project)
+		public async Task<IActionResult> PostProject([FromBody] ProjectDTO project)
 		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 			}
 
-			await _projectRepository.AddProjectAsync(project);
+			await _projectService.AddProjectAsync(project);
 
 			return CreatedAtAction("GetProject", new { id = project.ID }, project);
 		}

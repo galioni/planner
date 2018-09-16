@@ -15,7 +15,7 @@ namespace Planner.Infrastructure.Repository
 		{
 		}
 
-		public async Task<Project> GetProjectByIdAsync(Guid ProjectId)
+		public async Task<Project> GetProjectByIdAsync(int ProjectId)
 		{
 			var project = await GetByConditionAync(o => o.ID.Equals(ProjectId));
 			return project.FirstOrDefault();
