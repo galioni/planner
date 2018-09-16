@@ -5740,23 +5740,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\matro\\.nuget\\packages\\": {},
+    "C:\\Users\\dehga\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Dev\\Planner\\planner\\Planner\\Planner.Test\\Planner.Test.csproj",
+      "projectUniqueName": "D:\\Andre\\Projetos\\Git\\planner\\Planner\\Planner.Test\\Planner.Test.csproj",
       "projectName": "Planner.Test",
-      "projectPath": "D:\\Dev\\Planner\\planner\\Planner\\Planner.Test\\Planner.Test.csproj",
-      "packagesPath": "C:\\Users\\matro\\.nuget\\packages\\",
-      "outputPath": "D:\\Dev\\Planner\\planner\\Planner\\Planner.Test\\obj\\",
+      "projectPath": "D:\\Andre\\Projetos\\Git\\planner\\Planner\\Planner.Test\\Planner.Test.csproj",
+      "packagesPath": "C:\\Users\\dehga\\.nuget\\packages\\",
+      "outputPath": "D:\\Andre\\Projetos\\Git\\planner\\Planner\\Planner.Test\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\matro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\dehga\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
