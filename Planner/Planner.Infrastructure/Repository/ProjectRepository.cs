@@ -1,33 +1,41 @@
 ﻿using Planner.Core.Domain;
 using Planner.Infrastructure.Data;
+using Planner.Infrastructure.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Planner.Infrastructure.Repository
 {
-	public class ProjectRepository : RepositoryBase<Project>
+	public class ProjectRepository : RepositoryBase<Project>, IProjectRepository
 	{
-		public ProjectRepository(PlannerContext dbcontext)
-			: base(dbcontext)
+		public ProjectRepository(PlannerContext context)
+			: base(context)
 		{
 		}
 
-		public async void CreateProjectAsync(Project project)
+		public async Task<Project> GetProjectByIdAsync(Guid ProjectId)
 		{
-			AddAsync(project);
+			var project = await GetByConditionAync(o => o.ID.Equals(ProjectId));
+			return project.FirstOrDefault();
+		}
+
+		public async Task AddProjectAsync(Project project)
+		{
+			Add(project);
 			await SaveAsync();
 		}
 
-		public async void UpdateProjectAsync(Project project)
+		public async Task UpdateProjectAsync(Project project)
 		{
-			UpdateAsync(project);
+			Update(project);
 			await SaveAsync();
 		}
 
-		public async void DeleteProjectAsync(Project project)
+		public async Task DeleteProjectAsync(Project project)
 		{
-			DeleteAsync(project);
+			 Delete(project);
 			await SaveAsync();
 		}
 

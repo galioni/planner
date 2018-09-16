@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Planner.Core.Domain;
-using Planner.Infrastructure.Data;
+using Planner.Infrastructure.Interface;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Planner.API.Controllers
@@ -13,18 +12,18 @@ namespace Planner.API.Controllers
 	[ApiController]
 	public class ProjectsController : ControllerBase
 	{
-		private readonly PlannerContext _context;
+		private IProjectRepository _projectRepository;
 
-		public ProjectsController(PlannerContext context)
+		public ProjectsController(IProjectRepository projectRepository)
 		{
-			_context = context;
+			this._projectRepository = projectRepository;
 		}
 
 		// GET: api/Projects
 		[HttpGet]
-		public IEnumerable<Project> GetProjects()
+		public async Task<IEnumerable<Project>> GetProjects()
 		{
-			return _context.Projects;
+			return await _projectRepository.GetAllProjectsAsync();
 		}
 
 		// GET: api/Projects/5
@@ -36,7 +35,7 @@ namespace Planner.API.Controllers
 				return BadRequest(ModelState);
 			}
 
-			var project = await _context.Projects.FindAsync(id);
+			var project = await _projectRepository.GetProjectByIdAsync(id);
 
 			if (project == null)
 			{
@@ -60,22 +59,20 @@ namespace Planner.API.Controllers
 				return BadRequest();
 			}
 
-			_context.Entry(project).State = EntityState.Modified;
-
 			try
 			{
-				await _context.SaveChangesAsync();
+				//await _projectRepository.UpdateProjectAsync(project);
 			}
 			catch (DbUpdateConcurrencyException)
 			{
-				if (!ProjectExists(id))
-				{
-					return NotFound();
-				}
-				else
-				{
-					throw;
-				}
+				//if (!ProjectExists(id))
+				//{
+				//	return NotFound();
+				//}
+				//else
+				//{
+				//	throw;
+				//}
 			}
 
 			return NoContent();
@@ -90,36 +87,35 @@ namespace Planner.API.Controllers
 				return BadRequest(ModelState);
 			}
 
-			_context.Projects.Add(project);
-			await _context.SaveChangesAsync();
+			await _projectRepository.AddProjectAsync(project);
 
 			return CreatedAtAction("GetProject", new { id = project.ID }, project);
 		}
 
-		// DELETE: api/Projects/5
-		[HttpDelete("{id}")]
-		public async Task<IActionResult> DeleteProject([FromRoute] Guid id)
-		{
-			if (!ModelState.IsValid)
-			{
-				return BadRequest(ModelState);
-			}
+		//// DELETE: api/Projects/5
+		//[HttpDelete("{id}")]
+		//public async Task<IActionResult> DeleteProject([FromRoute] Guid id)
+		//{
+		//	if (!ModelState.IsValid)
+		//	{
+		//		return BadRequest(ModelState);
+		//	}
 
-			var project = await _context.Projects.FindAsync(id);
-			if (project == null)
-			{
-				return NotFound();
-			}
+		//	var project = await _projectRepository.DeleteProjectAsync(project);
+		//	if (project == null)
+		//	{
+		//		return NotFound();
+		//	}
 
-			_context.Projects.Remove(project);
-			await _context.SaveChangesAsync();
+		//	_context.Projects.Remove(project);
+		//	await _context.SaveChangesAsync();
 
-			return Ok(project);
-		}
+		//	return Ok(project);
+		//}
 
-		private bool ProjectExists(Guid id)
-		{
-			return _context.Projects.Any(e => e.ID == id);
-		}
+		//private bool ProjectExists(Guid id)
+		//{
+		//	return _context.Projects.Any(e => e.ID == id);
+		//}
 	}
 }
