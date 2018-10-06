@@ -15,4 +15,10 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Planner.API\Planner.API.csproj" />
+    <ProjectReference Include="..\Planner.Core\Planner.Core.csproj" />
+    <ProjectReference Include="..\Planner.Infrastructure\Planner.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

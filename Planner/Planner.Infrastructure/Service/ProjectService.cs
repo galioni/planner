@@ -44,9 +44,12 @@ namespace Planner.Infrastructure.Service
             return _mapper.Map<Project, ProjectDTO>(project);
         }
 
-        public Task UpdateProjectAsync(ProjectDTO project)
+        public async Task UpdateProjectAsync(ProjectDTO projectDTO)
         {
-            throw new NotImplementedException();
+            Project project = await _projectRepository.GetProjectByIdAsync(projectDTO.ID);
+            project.SetName(projectDTO.Name);
+            project.SetDescription(projectDTO.Description);
+            await _projectRepository.UpdateProjectAsync(project);
         }
     }
 }

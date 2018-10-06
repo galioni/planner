@@ -48,7 +48,7 @@ namespace Planner.API.Controllers
 
 		// PUT: api/Projects/5
 		[HttpPut("{id}")]
-		public async Task<IActionResult> PutProject([FromRoute] Guid id, [FromBody] Project project)
+		public async Task<IActionResult> PutProject([FromRoute] int id, [FromBody] ProjectDTO project)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -62,7 +62,7 @@ namespace Planner.API.Controllers
 
 			try
 			{
-				//await _projectRepository.UpdateProjectAsync(project);
+				await _projectService.UpdateProjectAsync(project);
 			}
 			catch (DbUpdateConcurrencyException)
 			{
@@ -93,30 +93,30 @@ namespace Planner.API.Controllers
 			return CreatedAtAction("GetProject", new { id = project.ID }, project);
 		}
 
-		//// DELETE: api/Projects/5
-		//[HttpDelete("{id}")]
-		//public async Task<IActionResult> DeleteProject([FromRoute] Guid id)
-		//{
-		//	if (!ModelState.IsValid)
-		//	{
-		//		return BadRequest(ModelState);
-		//	}
+        // DELETE: api/Projects/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProject([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-		//	var project = await _projectRepository.DeleteProjectAsync(project);
-		//	if (project == null)
-		//	{
-		//		return NotFound();
-		//	}
+            await _projectService.DeleteProjectAsync(id);
+            //if (project == null)
+            //{
+            //    return NotFound();
+            //}
 
-		//	_context.Projects.Remove(project);
-		//	await _context.SaveChangesAsync();
+            //_context.Projects.Remove(project);
+            //await _context.SaveChangesAsync();
 
-		//	return Ok(project);
-		//}
+            return NoContent();
+        }
 
-		//private bool ProjectExists(Guid id)
-		//{
-		//	return _context.Projects.Any(e => e.ID == id);
-		//}
-	}
+        //private bool ProjectExists(Guid id)
+        //{
+        //	return _context.Projects.Any(e => e.ID == id);
+        //}
+    }
 }
