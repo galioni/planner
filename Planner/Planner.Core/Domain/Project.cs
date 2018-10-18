@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Planner.Core.Domain
 {
@@ -9,6 +10,8 @@ namespace Planner.Core.Domain
 		public string Description { get; private set; }
 		public DateTime CreatedAt { get; private set; }
 		public DateTime UpdatedAt { get; private set; }
+
+        public List<Item> Items { get; set; }
 
 		public Project(string name, string description)
 		{
