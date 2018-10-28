@@ -16,9 +16,9 @@ namespace Planner.Infrastructure.Service
     {
         private readonly IProjectRepository _projectRepository;
         private readonly IMapper _mapper;
-        private readonly IProjectValidaiton _projectValidation;
+        private readonly IProjectValidation _projectValidation;
 
-        public ProjectService(IProjectRepository projectRepository, IMapper mapper, IProjectValidaiton projectValidaiton)
+        public ProjectService(IProjectRepository projectRepository, IMapper mapper, IProjectValidation projectValidaiton)
         {
             this._projectRepository = projectRepository;
             this._mapper = mapper;

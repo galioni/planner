@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Planner.Infrastructure.Interface
 {
-	public interface IProjectRepository
+	public interface IProjectRepository : IRepository
 	{
 		Task<IEnumerable<Project>> GetAllProjectsAsync();
 		Task<Project> GetProjectByIdAsync(int ProjectId);

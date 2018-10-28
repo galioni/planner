@@ -5,7 +5,7 @@ using Planner.Core.Domain;
 
 namespace Planner.Infrastructure.Validation
 {
-    class ProjectValidation : IProjectValidaiton
+    public class ProjectValidation : IProjectValidation
     {
         public bool IsNameValid(string name)
         {

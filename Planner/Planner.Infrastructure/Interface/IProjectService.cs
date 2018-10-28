@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Planner.Infrastructure.Interface
 {
-    public interface IProjectService
+    public interface IProjectService : IService
     {
         Task<IEnumerable<ProjectDTO>> GetAllProjectsAsync();
         Task<OperationResult> AddProjectAsync(ProjectDTO projectDTO);

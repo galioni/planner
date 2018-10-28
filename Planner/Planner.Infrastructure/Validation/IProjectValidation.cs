@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Planner.Infrastructure.Validation
 {
-    public interface IProjectValidaiton
+    public interface IProjectValidation : IValidation
     {
         bool IsNameValid(string name);
         bool IsValid(Project project);
