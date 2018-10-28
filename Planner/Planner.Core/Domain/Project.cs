@@ -15,8 +15,8 @@ namespace Planner.Core.Domain
 
 		public Project(string name, string description)
 		{
-			SetName(name);
-			SetDescription(description);
+            this.Name = name;
+            this.Description = description;
 			//this.ID = new Guid();
 			this.CreatedAt = DateTime.Now;
 		}
@@ -31,8 +31,6 @@ namespace Planner.Core.Domain
 
         public void SetName(string name)
 		{
-			if (String.IsNullOrEmpty(name)) throw new ArgumentException("Project's name can not be empty");
-
 			this.Name = name;
             SetUpdate();
 

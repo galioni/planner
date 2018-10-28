@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Planner.Core.Domain;
 using Planner.Infrastructure.DTO;
+using Planner.Infrastructure.Helpers;
 using Planner.Infrastructure.Interface;
 using Planner.Infrastructure.Repository;
+using Planner.Infrastructure.Validation;
 
 namespace Planner.Infrastructure.Service
 {
@@ -14,16 +16,28 @@ namespace Planner.Infrastructure.Service
     {
         private readonly IProjectRepository _projectRepository;
         private readonly IMapper _mapper;
+        private readonly IProjectValidaiton _projectValidation;
 
-        public ProjectService(IProjectRepository projectRepository, IMapper mapper)
+        public ProjectService(IProjectRepository projectRepository, IMapper mapper, IProjectValidaiton projectValidaiton)
         {
             this._projectRepository = projectRepository;
             this._mapper = mapper;
+            this._projectValidation = projectValidaiton;
         }
-        public async Task AddProjectAsync(ProjectDTO projectDTO)
+        public async Task<OperationResult> AddProjectAsync(ProjectDTO projectDTO)
         {
+            OperationResult result = new OperationResult();
             var project = _mapper.Map<ProjectDTO, Project>(projectDTO);
-             await _projectRepository.AddProjectAsync(project);
+
+            if (!_projectValidation.IsValid(project))
+            {
+                result.Success = false;
+                return result;
+            }
+
+            await _projectRepository.AddProjectAsync(project);
+            result.Success = true;
+            return result;
         }
 
         public async Task DeleteProjectAsync(int id)

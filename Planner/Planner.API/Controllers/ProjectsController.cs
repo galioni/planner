@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Planner.Core.Domain;
 using Planner.Infrastructure.DTO;
+using Planner.Infrastructure.Helpers;
 using Planner.Infrastructure.Interface;
 using System;
 using System.Collections.Generic;
@@ -88,7 +89,9 @@ namespace Planner.API.Controllers
 				return BadRequest(ModelState);
 			}
 
-			await _projectService.AddProjectAsync(project);
+			OperationResult result = await _projectService.AddProjectAsync(project);
+
+            if (!result.Success) return BadRequest(result.Message);
 
 			return CreatedAtAction("GetProject", new { id = project.ID }, project);
 		}
